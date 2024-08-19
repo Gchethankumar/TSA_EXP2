@@ -40,8 +40,7 @@ values = train['#Passengers'].values
 
 x=year
 y=values
-```
-```
+
 X = [i - x[len(x)//2] for i in x]
 x2 = [i ** 2 for i in X]
 xy = [i * j for i, j in zip(X, y)]
@@ -55,7 +54,8 @@ n=len(x)
 b=(n*sum(xy)-sum(y)*sum(X))/(n*sum(x2)-(sum(X)**2))
 a=(sum(y)-b*sum(X))/n
 print("a=%.1f,b=%.1f"%(a,b))
-
+```
+```
 l=[]
 for i in range(n):
   l.append(a+b*X[i]);
