@@ -130,7 +130,7 @@ lin2.predict(poly.fit_transform(pred2array))
 
 ### B- POLYNOMIAL TREND ESTIMATION
 
-![Uploading img10.png…]()
+![img10](https://github.com/user-attachments/assets/ffd246a9-b9a1-482c-8339-f65cce317f5f)
 
 
 ### RESULT:
