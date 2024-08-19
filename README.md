@@ -98,7 +98,8 @@ x4 = [i ** 4 for i in X]
 x2y = [i * j for i, j in zip(x2, y)]
 table = [[i, j, k, l, m,n,o,p] for i, j, k, l, m,n,o,p in zip(x, y, X, x2, x3,x4,xy,x2y)]
 print(tabulate(table, headers=["Year", "Prod", "X=x-2013", "X^2", "X^3", "X^4", "xy", "x2y"], tablefmt="grid"))
-
+```
+```
 from sklearn.linear_model import LinearRegression
 lin = LinearRegression()
 lin.fit(X, y)
