@@ -40,7 +40,8 @@ values = train['#Passengers'].values
 
 x=year
 y=values
-
+```
+```
 X = [i - x[len(x)//2] for i in x]
 x2 = [i ** 2 for i in X]
 xy = [i * j for i, j in zip(X, y)]
