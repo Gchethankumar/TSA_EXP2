@@ -20,7 +20,9 @@ To Implement Linear and Polynomial Trend Estiamtion Using Python.
 Developed By: G.Chethan Kumar
 Registration NO.: 212222240022
 ```
+
 ## A - LINEAR TREND ESTIMATION
+
 ```python
 import pandas as pd
 import numpy as np
