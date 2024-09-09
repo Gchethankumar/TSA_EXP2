@@ -24,117 +24,85 @@ Registration NO.: 212222240022
 ## A - LINEAR TREND ESTIMATION
 
 ```python
+# LINEAR TREND ESTIMATION
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from tabulate import tabulate
-%matplotlib inline
-train = pd.read_csv('AirPassengers.csv')
 
-train['Month'] = pd.to_datetime(train['Month'], format='%Y-%m')
-train['Year'] = train['Month'].dt.year
-train.head()
+# Load the data
+data = pd.read_csv('MonthValue.csv',nrows=50)
+data['Period'] = pd.to_datetime(data['Period'])
+daily_average = data.groupby('Period')['Revenue'].mean().reset_index()
 
-year = train['Year'].values.reshape(-1, 1)
-values = train['#Passengers'].values
+# Linear trend estimation
+x = np.arange(len(daily_average))
+y = daily_average['Revenue']
+linear_coeffs = np.polyfit(x, y, 1)
+linear_trend = np.polyval(linear_coeffs, x)
 
-x=year
-y=values
-
-X = [i - x[len(x)//2] for i in x]
-x2 = [i ** 2 for i in X]
-xy = [i * j for i, j in zip(X, y)]
-table = [[i, j, k, l, m] for i, j, k, l, m in zip(x, y, X, x2, xy)]
-print(tabulate(table, headers=["Year", "Prod", "X=x-2014", "X^2", "xy"], tablefmt="grid"))
-
-from sklearn.linear_model import LinearRegression
-lin = LinearRegression()
-lin.fit(X, y)
-n=len(x)
-b=(n*sum(xy)-sum(y)*sum(X))/(n*sum(x2)-(sum(X)**2))
-a=(sum(y)-b*sum(X))/n
-print("a=%.1f,b=%.1f"%(a,b))
-```
-```
-l=[]
-for i in range(n):
-  l.append(a+b*X[i]);
-print("Trend Equation : y=%d+%.2fx"%(a,b))
-import matplotlib.pyplot as plt
-plt.title("Linear Trend Graph")
-plt.xlabel("Year")
-plt.ylabel("Passengers")
-plt.plot(x,l,color='red')
+# Plotting
+plt.figure(figsize=(14, 7))
+plt.plot(daily_average['Period'], daily_average['Revenue'], label='Original Data', marker='o')
+plt.plot(daily_average['Period'], linear_trend, label='Linear Trend', color='red')
+plt.title('Linear Trend Estimation')
+plt.xlabel('Period')
+plt.ylabel('Revenue')
+plt.legend()
+plt.grid()
+plt.xticks(rotation=45)
+plt.tight_layout()
 plt.show()
-
-pred = 110.0
-predarray = np.array([[pred]])
-lin.predict(predarray)
 ```
+
 ## B- POLYNOMIAL TREND ESTIMATION
 ```python
+
+
+# POLYNOMIAL TREND ESTIMATION
+
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
-import pandas as pd
-from tabulate import tabulate
-%matplotlib inline
 
-train = pd.read_csv('AirPassengers.csv')
-train['Month'] = pd.to_datetime(train['Month'], format='%Y-%m')
-train['Year'] = train['Month'].dt.year
-train.head()
+# Load the data
+data = pd.read_csv('MonthValue.csv',nrows=50)
+data['Period'] = pd.to_datetime(data['Period'])
+daily_average = data.groupby('Period')['Revenue'].mean().reset_index()
 
-year = train['Year'].values.reshape(-1, 1)
-values = train['#Passengers'].values
-x=year
-y=values
-X = [2*(i-(sum(x)/len(x))) for i in x]
-x2 = [i ** 2 for i in X]
-xy = [i * j for i, j in zip(X, y)]
-x3 = [i ** 3 for i in X]
-x4 = [i ** 4 for i in X]
-x2y = [i * j for i, j in zip(x2, y)]
-table = [[i, j, k, l, m,n,o,p] for i, j, k, l, m,n,o,p in zip(x, y, X, x2, x3,x4,xy,x2y)]
-print(tabulate(table, headers=["Year", "Prod", "X=x-2013", "X^2", "X^3", "X^4", "xy", "x2y"], tablefmt="grid"))
-```
-```
-from sklearn.linear_model import LinearRegression
-lin = LinearRegression()
-lin.fit(X, y)
-from sklearn.preprocessing import PolynomialFeatures
-poly = PolynomialFeatures(degree=4)
-X_poly = poly.fit_transform(X)
-poly.fit(X_poly, y)
-lin2 = LinearRegression()
-lin2.fit(X_poly, y)
-plt.plot(X, lin2.predict(poly.fit_transform(X)),
-color='red')
-plt.title('Polynomial Regression')
-plt.xlabel('Month')
-plt.ylabel('Passengers')
+
+# Polynomial trend estimation (degree 2)
+x = np.arange(len(daily_average))
+y = daily_average['Revenue']
+poly_coeffs = np.polyfit(x, y, 2)
+poly_trend = np.polyval(poly_coeffs, x)
+
+# Plotting
+plt.figure(figsize=(14, 7))
+plt.plot(daily_average['Period'], daily_average['Revenue'], label='Original Data', marker='o')
+plt.plot(daily_average['Period'], poly_trend, label='Polynomial Trend (Degree 2)', color='green')
+plt.title('Polynomial Trend Estimation')
+plt.xlabel('Period')
+plt.ylabel('Revenue')
+plt.legend()
+plt.grid()
+plt.xticks(rotation=45)
+plt.tight_layout()
 plt.show()
 
-pred2 = 110.0
-pred2array = np.array([[pred2]])
-lin2.predict(poly.fit_transform(pred2array))
+
 ```
 ### OUTPUT
-
-#### Before Performing Trend Operations :
-
-![img8](https://github.com/user-attachments/assets/f33ec478-7620-4793-b9b6-e9674b54e5c3)
 
 
 ### A - LINEAR TREND ESTIMATION
 
-![img9](https://github.com/user-attachments/assets/f796cadc-142f-4b9b-be3e-faf839ae408e)
+![Screenshot 2024-09-09 113247](https://github.com/user-attachments/assets/f84bcf79-2ee6-4268-b5d0-dd9e7b75a000)
 
 
 ### B- POLYNOMIAL TREND ESTIMATION
 
-![img10](https://github.com/user-attachments/assets/ffd246a9-b9a1-482c-8339-f65cce317f5f)
+![Screenshot 2024-09-09 113304](https://github.com/user-attachments/assets/5f936b97-688f-4ed2-bbf2-06520f145ecd)
 
 
 ### RESULT:
