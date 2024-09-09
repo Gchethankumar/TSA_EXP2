@@ -1,5 +1,8 @@
+### DEVELOPED BY: G Chethan Kumar
+### REGISTER NO: 212222240022
+### DATE:
+
 # Ex.No: 02 LINEAR AND POLYNOMIAL TREND ESTIMATION
-#### Date:
 ### AIM:
 To Implement Linear and Polynomial Trend Estiamtion Using Python.
 
