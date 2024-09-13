@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 
 # Load the data
 data = pd.read_csv('india-gdp.csv',nrows=50)
-data['date'] = pd.to_datetime(data['date'])
+data['date'] = pd.to_datetime(data['date'], format='%d-%m-%Y')
 daily_average = data.groupby('date')[' AnnualChange'].mean().reset_index()
 
 # Linear trend estimation
@@ -69,7 +69,7 @@ import matplotlib.pyplot as plt
 
 # Load the data
 data = pd.read_csv('india-gdp.csv',nrows=50)
-data['date'] = pd.to_datetime(data['date'])
+data['date'] = pd.to_datetime(data['date'], format='%d-%m-%Y')
 daily_average = data.groupby('date')['AnnualChange'].mean().reset_index()
 
 # Polynomial trend estimation (degree 2)
