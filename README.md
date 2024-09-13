@@ -100,7 +100,7 @@ plt.show()
 
 ### B- POLYNOMIAL TREND ESTIMATION
 
-![Uploading Screenshot 2024-09-13 084611.png…]()
+![Screenshot 2024-09-13 084611](https://github.com/user-attachments/assets/3afd24dc-268e-47ff-b741-df03b2f319f3)
 
 ### RESULT:
 Thus the python program for linear and Polynomial Trend Estiamtion has been executed successfully.
