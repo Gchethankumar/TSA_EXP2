@@ -34,23 +34,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the data
-data = pd.read_csv('MonthValue.csv',nrows=50)
-data['Period'] = pd.to_datetime(data['Period'])
-daily_average = data.groupby('Period')['Revenue'].mean().reset_index()
+data = pd.read_csv('india-gdp.csv',nrows=50)
+data['date'] = pd.to_datetime(data['date'])
+daily_average = data.groupby('date')[' AnnualChange'].mean().reset_index()
 
 # Linear trend estimation
-x = np.arange(len(daily_average))
-y = daily_average['Revenue']
+x = np.arange(len(daily_average))  # This should have the same length as daily_average['Revenue']
+y = daily_average[' AnnualChange']
+
 linear_coeffs = np.polyfit(x, y, 1)
 linear_trend = np.polyval(linear_coeffs, x)
 
 # Plotting
 plt.figure(figsize=(14, 7))
-plt.plot(daily_average['Period'], daily_average['Revenue'], label='Original Data', marker='o')
-plt.plot(daily_average['Period'], linear_trend, label='Linear Trend', color='red')
+plt.plot(daily_average['date'], daily_average[' AnnualChange'], label='Original Data', marker='o')
+plt.plot(daily_average['date'], linear_trend, label='Linear Trend', color='red')
 plt.title('Linear Trend Estimation')
-plt.xlabel('Period')
-plt.ylabel('Revenue')
+plt.xlabel('Year')
+plt.ylabel('Annual % Change')
 plt.legend()
 plt.grid()
 plt.xticks(rotation=45)
@@ -60,8 +61,6 @@ plt.show()
 
 ## B- POLYNOMIAL TREND ESTIMATION
 ```python
-
-
 # POLYNOMIAL TREND ESTIMATION
 
 import pandas as pd
@@ -69,44 +68,39 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the data
-data = pd.read_csv('MonthValue.csv',nrows=50)
-data['Period'] = pd.to_datetime(data['Period'])
-daily_average = data.groupby('Period')['Revenue'].mean().reset_index()
-
+data = pd.read_csv('india-gdp.csv',nrows=50)
+data['date'] = pd.to_datetime(data['date'])
+daily_average = data.groupby('date')['AnnualChange'].mean().reset_index()
 
 # Polynomial trend estimation (degree 2)
 x = np.arange(len(daily_average))
-y = daily_average['Revenue']
+y = daily_average['AnnualChange']
 poly_coeffs = np.polyfit(x, y, 2)
 poly_trend = np.polyval(poly_coeffs, x)
 
 # Plotting
 plt.figure(figsize=(14, 7))
-plt.plot(daily_average['Period'], daily_average['Revenue'], label='Original Data', marker='o')
-plt.plot(daily_average['Period'], poly_trend, label='Polynomial Trend (Degree 2)', color='green')
+plt.plot(daily_average['date'], daily_average['AnnualChange'], label='Original Data', marker='o')
+plt.plot(daily_average['date'], poly_trend, label='Polynomial Trend (Degree 2)', color='green')
 plt.title('Polynomial Trend Estimation')
-plt.xlabel('Period')
-plt.ylabel('Revenue')
+plt.xlabel('Year')
+plt.ylabel('Annual % Change')
 plt.legend()
 plt.grid()
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
-
-
 ```
 ### OUTPUT
 
 
 ### A - LINEAR TREND ESTIMATION
 
-![Screenshot 2024-09-09 113247](https://github.com/user-attachments/assets/f84bcf79-2ee6-4268-b5d0-dd9e7b75a000)
-
+![Screenshot 2024-09-13 084556](https://github.com/user-attachments/assets/7c637e18-4a58-4210-abc1-21643987e70e)
 
 ### B- POLYNOMIAL TREND ESTIMATION
 
-![Screenshot 2024-09-09 113304](https://github.com/user-attachments/assets/5f936b97-688f-4ed2-bbf2-06520f145ecd)
-
+![Uploading Screenshot 2024-09-13 084611.png…]()
 
 ### RESULT:
 Thus the python program for linear and Polynomial Trend Estiamtion has been executed successfully.
